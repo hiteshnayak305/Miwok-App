@@ -23,15 +23,21 @@ public class word {
     private int imageId;
 
     /**
+     * container for audio source
+     */
+    private int audioId;
+
+    /**
      * constructor to create object with two strings
      *
      * @param eng first string english
      * @param mi  second string miwok
      */
-    public word(String eng, String mi) {
+    public word(String eng, String mi, int aud) {
         english = eng;
         miwok = mi;
         imageId = NO_IMAGE;
+        audioId = aud;
     }
 
     /**
@@ -40,10 +46,11 @@ public class word {
      * @param mi second string miwok
      * @param img to initiate imageId
      */
-    public word(String eng, String mi, int img) {
+    public word(String eng, String mi, int img, int aud) {
         english = eng;
         miwok = mi;
         imageId = img;
+        audioId = aud;
     }
 
     /**
@@ -80,5 +87,14 @@ public class word {
      */
     public int getImageId() {
         return imageId;
+    }
+
+    /**
+     * to get audio id as integer
+     *
+     * @return audio id as integer
+     */
+    public int getAudioId() {
+        return audioId;
     }
 }
