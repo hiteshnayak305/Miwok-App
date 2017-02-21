@@ -1,7 +1,10 @@
 package com.example.android.miwok;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -34,5 +37,13 @@ public class NumberActivity extends AppCompatActivity {
         wordAdapter adapter = new wordAdapter(this, words, R.color.category_numbers);
         ListView listView = (ListView) findViewById(R.id.common_list_root);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                MediaPlayer mediaPlayer = MediaPlayer.create(NumberActivity.this, R.raw.number_one);
+                mediaPlayer.start();
+            }
+        });
     }
 }
