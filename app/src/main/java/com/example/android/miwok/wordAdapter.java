@@ -30,7 +30,7 @@ public class wordAdapter extends ArrayAdapter<word> {
      * getView overloaded to handle change of text_views in item_list
      *
      * @param position    gets form layout position of item to show
-     * @param convertView get any recycled view from item_list view
+     * @param convertView get any recycled view from item_list.LinearLayout view
      * @param parent      parent layout in item_list layout
      * @return view to root view so added as child view in item_list's LinearLayout
      */

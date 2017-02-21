@@ -6,14 +6,12 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import static com.example.android.miwok.R.layout.activity_number;
-
 public class NumberActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(activity_number);
+        setContentView(R.layout.common_list);
 
         //creating ArrayList of word(custom class)
         ArrayList<word> words = new ArrayList<>();
@@ -34,7 +32,7 @@ public class NumberActivity extends AppCompatActivity {
          * and accepts LinearLayout to display two TextViews i.e. override ArrayAdapter
          */
         wordAdapter adapter = new wordAdapter(this, words);
-        ListView listView = (ListView) findViewById(R.id.activity_number);
+        ListView listView = (ListView) findViewById(R.id.common_list_root);
         listView.setAdapter(adapter);
     }
 }

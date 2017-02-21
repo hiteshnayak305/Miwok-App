@@ -11,7 +11,7 @@ public class FamilyActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_family);
+        setContentView(R.layout.common_list);
 
         //creating ArrayList of word(custom class)
         ArrayList<word> words = new ArrayList<>();
@@ -31,7 +31,7 @@ public class FamilyActivity extends AppCompatActivity {
          * and accepts LinearLayout to display two TextViews i.e. override ArrayAdapter
          */
         wordAdapter adapter = new wordAdapter(this, words);
-        ListView listView = (ListView) findViewById(R.id.activity_family);
+        ListView listView = (ListView) findViewById(R.id.common_list_root);
         listView.setAdapter(adapter);
     }
 }
