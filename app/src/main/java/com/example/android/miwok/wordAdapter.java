@@ -51,11 +51,11 @@ public class wordAdapter extends ArrayAdapter<word> {
         }
         //get word object from ArrayAdapter
         word currentWord = getItem(position);
-        //set first TextView of item_list
+        //set first TextView of item_list and background
         TextView mi = (TextView) listItemView.findViewById(R.id.miwok_text);
         mi.setText(currentWord.getMiwok());
         mi.setBackgroundResource(colorId);
-        //set second TextView of item_list
+        //set second TextView of item_list and background
         TextView eng = (TextView) listItemView.findViewById(R.id.english_text);
         eng.setText(currentWord.getEnglish());
         eng.setBackgroundResource(colorId);
