@@ -11,6 +11,17 @@ import java.util.ArrayList;
 
 public class ColorsActivity extends AppCompatActivity {
 
+    //handler for all the media playing task
+    private MediaPlayer mediaPlayer;
+    //listener for completion of media play
+    private MediaPlayer.OnCompletionListener completionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mp) {
+            //release resources on completion
+            releaseResource();
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,26 +47,30 @@ public class ColorsActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            MediaPlayer mediaPlayer;
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 word currentWord = words.get(position);
                 mediaPlayer = MediaPlayer.create(ColorsActivity.this, currentWord.getAudioId());
                 mediaPlayer.start();
-                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        releaseResource();
-                    }
-                });
-            }
-
-            private void releaseResource() {
-                if (mediaPlayer != null) {
-                    mediaPlayer.release();
-                    mediaPlayer = null;
-                }
+                mediaPlayer.setOnCompletionListener(completionListener);
             }
         });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //release resources if leave activity
+        releaseResource();
+    }
+
+    /**
+     * to release media resource
+     */
+    private void releaseResource() {
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 }
