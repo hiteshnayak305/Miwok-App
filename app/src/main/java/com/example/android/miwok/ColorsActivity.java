@@ -16,14 +16,14 @@ public class ColorsActivity extends AppCompatActivity {
         //creating ArrayList of word(custom class)
         ArrayList<word> words = new ArrayList<>();
         //adding word objects to list of word
-        words.add(new word("red", "weṭeṭṭi"));
-        words.add(new word("green", "chokokki"));
-        words.add(new word("brown", "ṭakaakki"));
-        words.add(new word("gray", "ṭopoppi"));
-        words.add(new word("black", "kululli"));
-        words.add(new word("white", "kelelli"));
-        words.add(new word("dusty yellow", "ṭopiisә"));
-        words.add(new word("mustard yellow", "chiwiiṭә"));
+        words.add(new word("red", "weṭeṭṭi", R.drawable.color_red));
+        words.add(new word("green", "chokokki", R.drawable.color_green));
+        words.add(new word("brown", "ṭakaakki", R.drawable.color_brown));
+        words.add(new word("gray", "ṭopoppi", R.drawable.color_gray));
+        words.add(new word("black", "kululli", R.drawable.color_black));
+        words.add(new word("white", "kelelli", R.drawable.color_white));
+        words.add(new word("dusty yellow", "ṭopiisә", R.drawable.color_dusty_yellow));
+        words.add(new word("mustard yellow", "chiwiiṭә", R.drawable.color_mustard_yellow));
         /**
          * need a custom ArrayAdapter which accepts words list
          * and accepts LinearLayout to display two TextViews i.e. override ArrayAdapter
