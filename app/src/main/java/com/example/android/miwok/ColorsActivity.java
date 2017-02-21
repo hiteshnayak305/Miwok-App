@@ -28,7 +28,7 @@ public class ColorsActivity extends AppCompatActivity {
          * need a custom ArrayAdapter which accepts words list
          * and accepts LinearLayout to display two TextViews i.e. override ArrayAdapter
          */
-        wordAdapter adapter = new wordAdapter(this, words);
+        wordAdapter adapter = new wordAdapter(this, words, R.color.category_colors);
         ListView listView = (ListView) findViewById(R.id.common_list_root);
         listView.setAdapter(adapter);
     }

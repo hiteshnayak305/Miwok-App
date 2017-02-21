@@ -17,14 +17,19 @@ import java.util.List;
 
 public class wordAdapter extends ArrayAdapter<word> {
 
+    //container for color
+    int colorId;
+
     /**
      * constructor for custom adapter
      *
      * @param context takes context
      * @param objects takes list of objects to view in list
      */
-    public wordAdapter(Context context, List<word> objects) {
+    public wordAdapter(Context context, List<word> objects, int color) {
         super(context, 0, objects);
+
+        colorId = color;
     }
 
     /**
@@ -49,16 +54,17 @@ public class wordAdapter extends ArrayAdapter<word> {
         //set first TextView of item_list
         TextView mi = (TextView) listItemView.findViewById(R.id.miwok_text);
         mi.setText(currentWord.getMiwok());
+        mi.setBackgroundResource(colorId);
         //set second TextView of item_list
         TextView eng = (TextView) listItemView.findViewById(R.id.english_text);
         eng.setText(currentWord.getEnglish());
+        eng.setBackgroundResource(colorId);
         //set image view source and visibility of ImageView
         ImageView img = (ImageView) listItemView.findViewById(R.id.image_view);
+        img.setVisibility(View.GONE);
         if (currentWord.hasImage()) {
             img.setVisibility(View.VISIBLE);
             img.setImageResource(currentWord.getImageId());
-        } else {
-            img.setVisibility(View.GONE);
         }
         return listItemView;
     }

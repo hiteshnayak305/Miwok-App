@@ -31,6 +31,7 @@ public class word {
     public word(String eng, String mi) {
         english = eng;
         miwok = mi;
+        imageId = NO_IMAGE;
     }
 
     /**
