@@ -1,5 +1,6 @@
 package com.example.android.miwok;
 
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,35 @@ public class ColorsActivity extends AppCompatActivity {
 
     //handler for all the media playing task
     private MediaPlayer mediaPlayer;
+    //audio manager object
+    private AudioManager audioManager;
+    //audiofocus chnge listener object
+    private AudioManager.OnAudioFocusChangeListener onAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
+        @Override
+        public void onAudioFocusChange(int focusChange) {
+            switch (focusChange) {
+                //on audio focus temporary loss or low volume for small time
+                case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
+                    mediaPlayer.pause();
+                    mediaPlayer.seekTo(0);
+                    break;
+                case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
+                    mediaPlayer.pause();
+                    mediaPlayer.seekTo(0);
+                    break;
+                //on regain of audio focus
+                case AudioManager.AUDIOFOCUS_GAIN:
+                    mediaPlayer.start();
+                    break;
+                //on complete loss of audio focus for unknown time
+                case AudioManager.AUDIOFOCUS_LOSS:
+                    releaseResource();
+                    break;
+                default:
+                    //
+            }
+        }
+    };
     //listener for completion of media play
     private MediaPlayer.OnCompletionListener completionListener = new MediaPlayer.OnCompletionListener() {
         @Override
@@ -27,6 +57,8 @@ public class ColorsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.common_list);
 
+        //assign AUDIO_SERVICE to audio manager
+        audioManager = (AudioManager) this.getSystemService(AUDIO_SERVICE);
         //creating ArrayList of word(custom class)
         final ArrayList<word> words = new ArrayList<>();
         //adding word objects to list of word
@@ -49,10 +81,15 @@ public class ColorsActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                releaseResource();
                 word currentWord = words.get(position);
-                mediaPlayer = MediaPlayer.create(ColorsActivity.this, currentWord.getAudioId());
-                mediaPlayer.start();
-                mediaPlayer.setOnCompletionListener(completionListener);
+                //request audio focus to play media
+                int result = audioManager.requestAudioFocus(onAudioFocusChangeListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+                if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+                    mediaPlayer = MediaPlayer.create(ColorsActivity.this, currentWord.getAudioId());
+                    mediaPlayer.start();
+                    mediaPlayer.setOnCompletionListener(completionListener);
+                }
             }
         });
     }
@@ -71,6 +108,8 @@ public class ColorsActivity extends AppCompatActivity {
         if (mediaPlayer != null) {
             mediaPlayer.release();
             mediaPlayer = null;
+            //abandon audiomanager
+            audioManager.abandonAudioFocus(onAudioFocusChangeListener);
         }
     }
 }
