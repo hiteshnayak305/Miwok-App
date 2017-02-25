@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -54,11 +55,12 @@ public class wordAdapter extends ArrayAdapter<word> {
         //set first TextView of item_list and background
         TextView mi = (TextView) listItemView.findViewById(R.id.miwok_text);
         mi.setText(currentWord.getMiwok());
-        mi.setBackgroundResource(colorId);
         //set second TextView of item_list and background
         TextView eng = (TextView) listItemView.findViewById(R.id.english_text);
         eng.setText(currentWord.getEnglish());
-        eng.setBackgroundResource(colorId);
+        //set background for relative layout
+        RelativeLayout rl = (RelativeLayout) listItemView.findViewById(R.id.text_container);
+        rl.setBackgroundResource(colorId);
         //set image view source and visibility of ImageView
         ImageView img = (ImageView) listItemView.findViewById(R.id.image_view);
         img.setVisibility(View.GONE);
