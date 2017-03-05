@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * Created custom word adapter to dynamically change two TextView from item_list
+ * Created custom word adapter to dynamically change two TextView from item
  */
 
 public class wordAdapter extends ArrayAdapter<word> {
@@ -34,28 +34,28 @@ public class wordAdapter extends ArrayAdapter<word> {
     }
 
     /**
-     * getView overloaded to handle change of text_views in item_list
+     * getView overloaded to handle change of text_views in item
      *
      * @param position    gets form layout position of item to show
-     * @param convertView get any recycled view from item_list.LinearLayout view
-     * @param parent      parent layout in item_list layout
-     * @return view to root view so added as child view in item_list's LinearLayout
+     * @param convertView get any recycled view from item.LinearLayout view
+     * @param parent      parent layout in item layout
+     * @return view to root view so added as child view in item's LinearLayout
      */
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         //check if existing view is reused otherwise inflate the view
-        //listItemView referencing root linear layout   i.e. LinearLayout from item_list
+        //listItemView referencing root linear layout   i.e. LinearLayout from item
         View listItemView = convertView;
         if (listItemView == null) {
-            listItemView = LayoutInflater.from(getContext()).inflate(R.layout.item_list, parent, false);
+            listItemView = LayoutInflater.from(getContext()).inflate(R.layout.item, parent, false);
         }
         //get word object from ArrayAdapter
         word currentWord = getItem(position);
-        //set first TextView of item_list and background
+        //set first TextView of item and background
         TextView mi = (TextView) listItemView.findViewById(R.id.miwok_text);
         mi.setText(currentWord.getMiwok());
-        //set second TextView of item_list and background
+        //set second TextView of item and background
         TextView eng = (TextView) listItemView.findViewById(R.id.english_text);
         eng.setText(currentWord.getEnglish());
         //set background for relative layout
